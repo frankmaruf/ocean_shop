@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Ocean Shop API
+  version: 1.0.0
+  description: Stay Tune with Ocean Shop
+paths:
+  /inventory/api/products/:
+    get:
+      operationId: inventory_api_products_list
+      parameters:
+      - in: query
+        name: ''
+        schema:
+          type: string
+        description: Products List
+      tags:
+      - inventory
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Products'
+          description: ''
+  /inventory/api/products/{slug}/:
+    get:
+      operationId: inventory_api_products_retrieve
+      parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - inventory
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    ProductRelatedImage:
+      type: object
+      properties:
+        product_image:
+          type: string
+          format: uri
+        position:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+      required:
+      - product_image
+    Products:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        product_related_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductRelatedImage'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_active:
+          type: boolean
+        deleted:
+          type: boolean
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        slug:
+          type: string
+          maxLength: 250
+          pattern: ^[-a-zA-Z0-9_]+$
+        created_by:
+          type: integer
+          nullable: true
+        updated_by:
+          type: integer
+          nullable: true
+        deleted_by:
+          type: integer
+          nullable: true
+        categories:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        tags:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+      required:
+      - categories
+      - created_at
+      - id
+      - name
+      - product_related_images
+      - slug
+      - tags
+      - updated_at
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

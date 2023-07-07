@@ -1,0 +1,61 @@
+virtualenv env -p python
+cd env
+env/scripts/activate
+
+
+
+
+python manage.py runscript fakedata -v3
+or
+python manage.py runscript fakedata -v2
+
+
+
+Install SSL Certificate on your Site
+
+$ sudo snap install --classic certbot 
+$ sudo ln -s /snap/bin/certbot /usr/bin/certbot
+$ sudo  certbot --nginx
+
+Add HTTPS Settings
+
+"""SESSION _COOKIE_ SECURE setting controls whether to restrict session cookies to HTTPS connections.
+
+CSRF_COOKIE_SECURE setting controls whether to restrict session cookies to HTTPS connections.
+
+SECURE_SSL_REDIRECT to redirect all non-HTTPS requests to HTTPS"""
+
+# settings.py 
+SESSION_COOKIE_SECURE =True 
+CSRF_COOKIE_SECURE =True  
+SECURE_SSL_REDIRECT=True 
+
+
+Add HSTS(HTTP Strict Transport Security) Settings
+HSTS is an HTTP header that helps protect users against man-in-the-middle and protocol downgrade attacks. It’s a way of telling the browser to always use HTTPS for your domain and never using HTTP. This can help you reduce the chances of data breaches due to eavesdropping or changes in the perceived security of transactions.
+
+# settings.py
+# HSTS settings  
+SECURE_HSTS_SECONDS= 1209600 # 2 weeks 
+SECURE_HSTS_PRELOAD =True 
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True 
+
+Define ALLOWED_HOSTS in settings
+
+The Allow host option in Django specifies which hosts are allowed to access your website. By default, not all hosts are allowed. 
+Therefore, you must specify either a list of explicit hosts or a pattern that is matched against the request’s host header.
+
+# settings.py
+ALLOWED_HOSTS = ['.example.com']
+
+
+Copy static Files to the static directory (single place for all static files )
+
+$ python manage.py collectstatic 
+
+# settings.py 
+STATIC_URL='/static/'
+STATIC_ROOT=os.path.join(BASE_DIR,"static/")
+
+# command to check deployment checklist 
+$ python manage.py check --deploy
