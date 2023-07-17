@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "ocean-shop"
+version = "0.1.0"
+description = ""
+authors = ["Md. Abdullah Al Maruf <thefrankmaruf@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "ocean_shop"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.3"
+django-filter = "^23.2"
+faker = "^18.13.0"
+pillow = "^10.0.0"
+django-ckeditor = "^6.6.1"
+djangorestframework = "^3.14.0"
+django-extensions = "^3.2.3"
+graphene-django = "^3.1.2"
+django-silk = "^5.0.3"
+drf-spectacular = "^0.26.3"
+django-cors-headers = "^4.1.0"
+mysqlclient = "^2.2.0"
+django-threadlocals = "^0.10"
+autopep8 = "^2.0.2"
+djlint = "^1.31.1"
+django-waffle = "^3.0.0"
+jupyterlab = "^4.0.3"
+ipykernel = "^6.24.0"
+jupyter = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,15 +1,54 @@
+us notebook with django
+python manage.py shell_plus --notebook
+
+
+
+@virtualenv
 virtualenv env -p python
 cd env
 env/scripts/activate
 
+@poetry
+pip install poetry
+
+1. to create the virtual env in the same dir
+
+#poetry config virtualenvs.in-project true
+
+2. creating the virtual env
+
+#poetry install
+
+3. Working with package
+
+#poetry add package name
+#poetry remove package name
+
+
+5. Get the poetry info
+
+#poetry env info
+(for path)
+#poetry env info -p
+
+6. Activing/Deactiving the shell
+
+#poetry shell
+#exit or deactivate
 
 
 
+7. Get all list of env
+#poetry env list
+
+@django_extensions
 python manage.py runscript fakedata -v3
 or
 python manage.py runscript fakedata -v2
 
 
+
+@@@@Tips
 
 Install SSL Certificate on your Site
 

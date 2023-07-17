@@ -39,17 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Internal
+    # local_app
     'shop',
     "inventory",
     "customer",
-    # External
+    # installed_apps
     'ckeditor',
     'django_extensions',
     'ckeditor_uploader',
     "corsheaders",
     "rest_framework",
     'drf_spectacular',
+    'silk',
+    "graphene_django",
+    'waffle',
+    
 ]
 
 MIDDLEWARE = [
@@ -63,7 +67,16 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     'threadlocals.middleware.ThreadLocalMiddleware',
+    'silk.middleware.SilkyMiddleware',
+    'waffle.middleware.WaffleMiddleware',
 ]
+
+GRAPHENE = {
+    'MIDDLEWARE': [
+        'graphene_django.debug.DjangoDebugMiddleware',
+    ]
+}
+
 
 ROOT_URLCONF = 'core.urls'
 
@@ -198,7 +211,7 @@ LOGGING = {
             'include_html': True,
         },
     },
-    'loggers': p{
+    'loggers': {
         'django': {
             'handlers': ['console'],
             'level': 'INFO',
@@ -209,17 +222,6 @@ LOGGING = {
         },
     },
 }
-
-
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-sentry_sdk.init(
-    dsn="<YOUR_SENTRY_DSN>",
-    integrations=[DjangoIntegration()],
-    traces_sample_rate=1.0,
-    send_default_pii=True,
-)
-
 
 try:
     from .local_settings import *
