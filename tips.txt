@@ -17,7 +17,7 @@ pip install poetry
 
 2. creating the virtual env
 
-#poetry install
+#poetry init
 
 3. Working with package
 
